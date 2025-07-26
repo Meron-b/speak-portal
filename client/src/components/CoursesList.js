@@ -56,7 +56,7 @@ function CoursesList() {
             to={`/courses/${course.id}`} 
             className="course-card"
           >
-            <div className="course-image">
+            <div className={`course-image course-image-${course.id}`}>
               <img src={course.thumbnailImageUrl} alt={course.title} />
             </div>
             <div className="course-content">

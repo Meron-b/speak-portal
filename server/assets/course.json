@@ -33,26 +33,26 @@
       "title": "Español para Viajeros",
       "subtitle": "with Carlos & Maria",
       "language": "Spanish-English",
-      "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/thumbnailImageUrl/te_1_thumbnailImage.jpg",
+      "thumbnailImageUrl": "https://i.postimg.cc/fy5FyHN4/Spanish-Thumbnailpng.jpg",
       "backgroundImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/headerImageUrl/basics_0_headerImage.png",
       "lessons": [
         {
           "id": "es_day_0",
           "title": "¿Dónde está la estación de tren?",
           "subtitle": "Where is the train station?",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D0_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/BnJzHfvr/Spanish-Lesson-Thumb1.jpg"
         },
         {
           "id": "es_day_1",
           "title": "Una mesa para dos, por favor.",
           "subtitle": "A table for two, please.",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D1_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/jjtJRvZQ/Spanish-Lesson-Thumb2.jpg"
         },
         {
           "id": "es_day_2",
           "title": "¿Cuánto cuesta esto?",
           "subtitle": "How much does this cost?",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D2_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/VvDChtjB/Spanish-Lesson-Thumb3.jpg"
         }
       ]
     },
@@ -61,26 +61,26 @@
       "title": "Français pour les voyageurs",
       "subtitle": "with Sophie & Luc",
       "language": "French-English",
-      "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/thumbnailImageUrl/te_1_thumbnailImage.jpg",
+      "thumbnailImageUrl": "https://i.postimg.cc/G3760mbq/French-Thumbnail.jpg",
       "backgroundImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/headerImageUrl/basics_0_headerImage.png",
       "lessons": [
         {
           "id": "fr_day_0",
           "title": "Où sont les toilettes?",
           "subtitle": "Where are the restrooms?",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D0_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/W4Sch6PP/French-Lesson-Thumb1.jpg"
         },
         {
           "id": "fr_day_1",
           "title": "Je voudrais un café, s'il vous plaît.",
           "subtitle": "I would like a coffee, please.",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D1_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/8zQ7HDfz/French-Lesson-Thumb2-1.png"
         },
         {
           "id": "fr_day_2",
           "title": "Combien ça coûte?",
           "subtitle": "How much does it cost?",
-          "thumbnailImageUrl": "https://d34af8cfq8hdgo.cloudfront.net/images/courses/TE1/TE1_D2_imageUrl.jpg"
+          "thumbnailImageUrl": "https://i.postimg.cc/CLyMy7hv/French-Lesson-Thumb3.jpg"
         }
       ]
     }

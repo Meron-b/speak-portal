@@ -15,7 +15,7 @@
   left: 24px;
   z-index: 10;
   background: #ffffff;
-  color: #64748b;
+  color: rgb(137, 144, 173);
   text-decoration: none;
   padding: 12px 20px;
   border-radius: 12px;
@@ -27,7 +27,7 @@
 
 .back-button:hover {
   background: #f8fafc;
-  color: #334155;
+  color: rgb(18, 32, 90);
   border-color: #cbd5e1;
 }
 
@@ -62,19 +62,19 @@
 
 .course-title {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 16px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: rgb(18, 32, 90);
 }
 
 .course-subtitle {
   font-size: 16px;
-  color: #64748b;
+  color: rgb(137, 144, 173);
   margin-bottom: 24px;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .course-meta {
@@ -97,7 +97,7 @@
 
 .course-lessons-count {
   background: #f1f5f9;
-  color: #64748b;
+  color: rgb(137, 144, 173);
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 600;
@@ -110,9 +110,9 @@
 
 .lessons-section h2 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 24px;
-  color: #0f172a;
+  color: rgb(18, 32, 90);
   letter-spacing: -0.01em;
   text-align: center;
 }
@@ -176,18 +176,18 @@
 
 .lesson-title {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 4px;
-  color: #0f172a;
+  color: rgb(18, 32, 90);
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 
 .lesson-subtitle {
   font-size: 14px;
-  color: #64748b;
+  color: rgb(137, 144, 173);
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 /* Mobile-only design - no responsive breakpoints */ 
