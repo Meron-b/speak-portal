@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './LessonDetail.css';
 
@@ -8,6 +8,11 @@ function LessonDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [transcription, setTranscription] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
+  
+  const wsRef = useRef(null);
 
   const fetchLesson = useCallback(async () => {
     try {
@@ -28,10 +33,117 @@ function LessonDetail() {
     fetchLesson();
   }, [fetchLesson]);
 
+  // WebSocket connection
+  const connectWebSocket = useCallback(() => {
+    if (isConnecting || isConnected) return;
+    
+    setIsConnecting(true);
+    console.log('Attempting WebSocket connection...');
+    
+    try {
+      const ws = new WebSocket('ws://localhost:3001');
+      
+      ws.onopen = () => {
+        console.log('WebSocket connected successfully');
+        setIsConnected(true);
+        setIsConnecting(false);
+      };
+      
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log('WebSocket message received:', data);
+          
+          switch (data.type) {
+            case 'recording_started':
+              console.log('Recording started:', data.message);
+              break;
+              
+            case 'recording_stopped':
+              console.log('Recording stopped:', data.message);
+              setIsRecording(false);
+              break;
+              
+            case 'transcription_chunk':
+              console.log('Received transcription chunk:', data.text);
+              setTranscription(prev => prev + data.text);
+              break;
+              
+            case 'transcription_complete':
+              console.log('Transcription completed:', data.message);
+              setIsRecording(false);
+              break;
+              
+            case 'error':
+              console.error('WebSocket error:', data.message);
+              setError(data.message);
+              break;
+              
+            default:
+              console.log('Unknown WebSocket message:', data);
+          }
+        } catch (error) {
+          console.error('Error parsing WebSocket message:', error);
+        }
+      };
+      
+      ws.onclose = () => {
+        console.log('WebSocket disconnected');
+        setIsConnected(false);
+        setIsConnecting(false);
+        setIsRecording(false);
+      };
+      
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        setIsConnected(false);
+        setIsConnecting(false);
+        setError('WebSocket connection failed');
+      };
+      
+      wsRef.current = ws;
+    } catch (error) {
+      console.error('Error creating WebSocket:', error);
+      setIsConnecting(false);
+      setError('Failed to connect to recording service');
+    }
+  }, [isConnecting, isConnected]);
+
+  // Cleanup WebSocket on unmount
+  useEffect(() => {
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
+  }, []);
+
   const handleRecordClick = () => {
-    setIsRecording(!isRecording);
-    // TODO: Implement WebSocket connection for recording simulation
-    console.log('Record button clicked - recording simulation will be implemented next');
+    if (!isRecording) {
+      // Start recording
+      if (!isConnected) {
+        connectWebSocket();
+        // Wait a bit for connection to establish
+        setTimeout(() => {
+          if (isConnected && wsRef.current) {
+            wsRef.current.send(JSON.stringify({ type: 'start_recording' }));
+            setIsRecording(true);
+            setTranscription(''); // Clear previous transcription
+          }
+        }, 500);
+      } else {
+        // Already connected, start recording immediately
+        wsRef.current.send(JSON.stringify({ type: 'start_recording' }));
+        setIsRecording(true);
+        setTranscription('');
+      }
+    } else {
+      // Stop recording
+      if (wsRef.current) {
+        wsRef.current.send(JSON.stringify({ type: 'stop_recording' }));
+      }
+      setIsRecording(false);
+    }
   };
 
   if (loading) {
@@ -94,6 +206,7 @@ function LessonDetail() {
             <button 
               className={`record-button ${isRecording ? 'recording' : ''}`}
               onClick={handleRecordClick}
+              disabled={isConnecting}
             >
               {isRecording ? (
                 <>
@@ -108,10 +221,23 @@ function LessonDetail() {
               )}
             </button>
 
+            {isConnecting && (
+              <div className="connection-status">
+                <p>Connecting to recording service...</p>
+              </div>
+            )}
+
             {isRecording && (
               <div className="recording-status">
                 <p>Recording in progress...</p>
-                <p className="recording-hint">Simulation: Audio chunks will be sent via WebSocket</p>
+                <p className="recording-hint">Simulation: Audio chunks are being processed</p>
+              </div>
+            )}
+
+            {transcription && (
+              <div className="transcription-display">
+                <h3>Your Speech:</h3>
+                <div className="transcription-text">{transcription}</div>
               </div>
             )}
           </div>

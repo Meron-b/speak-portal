@@ -192,6 +192,55 @@
   margin-top: 8px !important;
 }
 
+.connection-status {
+  margin-top: 20px;
+  padding: 16px;
+  background: #fff3cd;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+}
+
+.connection-status p {
+  margin: 0;
+  font-size: 14px;
+  color: #856404;
+}
+
+.transcription-display {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #28a745;
+}
+
+.transcription-display h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.transcription-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  min-height: 60px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.record-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
