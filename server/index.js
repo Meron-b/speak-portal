@@ -1,22 +1,22 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs').promises; // to use async/await
 const WebSocket = require('ws');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001; // flex for deployment
 
-// Create HTTP server
+/* Create HTTP server */
 const server = require('http').createServer(app);
 
-// Create WebSocket server
+/* Create WebSocket server */
 const wss = new WebSocket.Server({ server });
 
-// Middleware
+/* Middleware */
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'assets')));
 
-// CORS middleware for development
+/* CORS middleware for development */
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   }
 });
 
-// Helper function to read JSON files
+/* Helper function to read JSON files */
 async function readJsonFile(filename) {
   try {
     const filePath = path.join(__dirname, 'assets', filename);
@@ -40,12 +40,12 @@ async function readJsonFile(filename) {
   }
 }
 
-// Helper function to find course by ID
+/* Helper function to find course by ID */
 function findCourseById(courses, courseId) {
   return courses.find(course => course.id === courseId);
 }
 
-// Helper function to find lesson by ID across all courses
+/* Helper function to find lesson by ID across all courses */
 function findLessonById(courses, lessonId) {
   for (const course of courses) {
     const lesson = course.lessons.find(lesson => lesson.id === lessonId);
@@ -56,7 +56,7 @@ function findLessonById(courses, lessonId) {
   return null;
 }
 
-// WebSocket connection handling
+/* WebSocket connection handling */
 wss.on('connection', async (ws) => {
   console.log('WebSocket client connected');
   
@@ -80,7 +80,7 @@ wss.on('connection', async (ws) => {
     return;
   }
 
-  // Handle incoming messages
+  /* Handle incoming messages */
   ws.on('message', async (message) => {
     try {
       const data = JSON.parse(message);
@@ -109,7 +109,7 @@ wss.on('connection', async (ws) => {
           
         case 'audio_chunk':
           // In a real app, this would process actual audio
-          // For simulation, we just acknowledge receipt
+          // For simulation, acknowledge receipt of audio chunk
           console.log('Received audio chunk:', data.chunkId);
           ws.send(JSON.stringify({ 
             type: 'audio_chunk_received',
@@ -141,13 +141,13 @@ wss.on('connection', async (ws) => {
   });
 });
 
-// Simulate recording process
+/* Simulate recording process */
 async function simulateRecording(ws, audioChunks, transcriptionChunks) {
   console.log('Starting recording simulation...');
   
   for (let i = 0; i < audioChunks.length; i++) {
     // Check if recording was stopped
-    if (!ws.readyState === WebSocket.OPEN) {
+    if (ws.readyState !== WebSocket.OPEN) {
       break;
     }
     
@@ -168,7 +168,7 @@ async function simulateRecording(ws, audioChunks, transcriptionChunks) {
     console.log(`Sent transcription chunk ${i + 1}/${audioChunks.length}: "${transcriptionChunk.text}"`);
   }
   
-  // Send final transcription complete message
+  /* Send final transcription complete message */
   ws.send(JSON.stringify({
     type: 'transcription_complete',
     message: 'Transcription completed'
@@ -177,9 +177,9 @@ async function simulateRecording(ws, audioChunks, transcriptionChunks) {
   console.log('Recording simulation completed');
 }
 
-// API Routes
+/* API Routes */
 
-// GET /api/courses - Return list of all courses
+/* GET /api/courses - Return list of all courses */
 app.get('/api/courses', async (req, res) => {
   try {
     const data = await readJsonFile('course.json');
@@ -189,7 +189,7 @@ app.get('/api/courses', async (req, res) => {
   }
 });
 
-// GET /api/courses/:courseId - Return course details and lessons
+/* GET /api/courses/:courseId - Return course details and lessons */
 app.get('/api/courses/:courseId', async (req, res) => {
   try {
     const { courseId } = req.params;
@@ -206,7 +206,7 @@ app.get('/api/courses/:courseId', async (req, res) => {
   }
 });
 
-// GET /api/lessons/:lessonId - Return lesson details
+/* GET /api/lessons/:lessonId - Return lesson details */
 app.get('/api/lessons/:lessonId', async (req, res) => {
   try {
     const { lessonId } = req.params;
@@ -234,7 +234,7 @@ app.get('/api/lessons/:lessonId', async (req, res) => {
   }
 });
 
-// GET /api/audio - Return audio chunks for simulation
+/* GET /api/audio - Return audio chunks for simulation */
 app.get('/api/audio', async (req, res) => {
   try {
     const audioData = await readJsonFile('audio.json');
@@ -244,7 +244,7 @@ app.get('/api/audio', async (req, res) => {
   }
 });
 
-// GET /api/transcriptions - Return transcription data
+/* GET /api/transcriptions - Return transcription data */
 app.get('/api/transcriptions', async (req, res) => {
   try {
     const transcriptionData = await readJsonFile('transcriptions.json');
@@ -254,23 +254,23 @@ app.get('/api/transcriptions', async (req, res) => {
   }
 });
 
-// Health check endpoint
+/* Health check endpoint */
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Error handling middleware
+/* Error handling middleware */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// 404 handler
+/* 404 handler */
 app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint not found' });
 });
 
-// Start server
+/* Start server */
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API available at http://localhost:${PORT}/api`);

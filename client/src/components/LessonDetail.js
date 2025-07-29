@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import AudioWaveform from './AudioWaveform';
 import './LessonDetail.css';
 
 function LessonDetail() {
@@ -34,7 +35,7 @@ function LessonDetail() {
   }, [fetchLesson]);
 
   // WebSocket connection
-  const connectWebSocket = useCallback(() => {
+  const connectWebSocket = useCallback((shouldStartRecording = false) => {
     if (isConnecting || isConnected) return;
     
     setIsConnecting(true);
@@ -47,6 +48,14 @@ function LessonDetail() {
         console.log('WebSocket connected successfully');
         setIsConnected(true);
         setIsConnecting(false);
+        
+        // If recording was requested, start it immediately
+        if (shouldStartRecording) {
+          console.log('Starting recording immediately after connection');
+          ws.send(JSON.stringify({ type: 'start_recording' }));
+          setIsRecording(true);
+          setTranscription(''); // Clear previous transcription
+        }
       };
       
       ws.onmessage = (event) => {
@@ -122,15 +131,8 @@ function LessonDetail() {
     if (!isRecording) {
       // Start recording
       if (!isConnected) {
-        connectWebSocket();
-        // Wait a bit for connection to establish
-        setTimeout(() => {
-          if (isConnected && wsRef.current) {
-            wsRef.current.send(JSON.stringify({ type: 'start_recording' }));
-            setIsRecording(true);
-            setTranscription(''); // Clear previous transcription
-          }
-        }, 500);
+        // Pass flag to start recording once connected
+        connectWebSocket(true);
       } else {
         // Already connected, start recording immediately
         wsRef.current.send(JSON.stringify({ type: 'start_recording' }));
@@ -198,10 +200,10 @@ function LessonDetail() {
           </div>
 
           <div className="recording-section">
-            <div className="phrase-display">
-              <div className="phrase-original">{lesson.title}</div>
-              <div className="phrase-translation">{lesson.subtitle}</div>
-            </div>
+            <AudioWaveform 
+              isRecording={isRecording} 
+              isConnecting={isConnecting}
+            />
 
             <button 
               className={`record-button ${isRecording ? 'recording' : ''}`}
@@ -236,7 +238,7 @@ function LessonDetail() {
 
             {transcription && (
               <div className="transcription-display">
-                <h3>Your Speech:</h3>
+                <h3>Speech Transcription:</h3>
                 <div className="transcription-text">{transcription}</div>
               </div>
             )}

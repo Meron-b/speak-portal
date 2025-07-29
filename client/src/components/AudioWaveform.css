@@ -1,0 +1,96 @@
+.audio-waveform-container {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.waveform-wrapper {
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  gap: 2px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.waveform-bar {
+  width: 3px;
+  background: #3b82f6;
+  border-radius: 1.5px;
+  transition: all 0.2s ease;
+  opacity: 0.4;
+  min-height: 4px;
+}
+
+.waveform.connecting .waveform-bar {
+  background: #fbbf24;
+  animation: waveform-connecting 1.2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.waveform.recording .waveform-bar {
+  background: #3b82f6;
+  animation: waveform-recording 0.6s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+/* Remove all status text and pulse elements */
+.waveform-status {
+  display: none;
+}
+
+.status-text {
+  display: none;
+}
+
+.recording-pulse {
+  display: none;
+}
+
+/* Waveform Animations - removed idle animation */
+@keyframes waveform-connecting {
+  0%, 100% {
+    transform: scaleY(0.3);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(0.8);
+    opacity: 0.7;
+  }
+}
+
+@keyframes waveform-recording {
+  0%, 100% {
+    transform: scaleY(0.4);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1.0);
+    opacity: 0.9;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .waveform {
+    height: 35px;
+    gap: 1.5px;
+  }
+  
+  .waveform-bar {
+    width: 2.5px;
+  }
+}
+
+/* Simplified staggered animation delays */
+.waveform-bar:nth-child(3n+1) { animation-delay: 0s; }
+.waveform-bar:nth-child(3n+2) { animation-delay: 0.15s; }
+.waveform-bar:nth-child(3n+3) { animation-delay: 0.3s; } 

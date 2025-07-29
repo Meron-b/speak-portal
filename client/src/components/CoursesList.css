@@ -2,32 +2,38 @@
   min-height: 100vh;
   background-color: #ffffff;
 }
-
-.courses-header {
-  background: #ffffff;
-  color: #1a1a1a;
-  padding: 80px 24px 40px;
-  text-align: center;
-  border-bottom: 1px solid #f1f5f9;
+/* Updated Courses Section */
+.courses-section {
+  padding: 40px 20px;
 }
 
-.courses-header h1 {
-  font-size: 32px;
-  font-weight: 500;
-  margin-bottom: 16px;
+.section-header {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
   letter-spacing: -0.02em;
   color: rgb(18, 32, 90);
 }
 
-.courses-header p {
-  font-size: 16px;
+.section-header p {
+  font-size: 18px;
   color: rgb(137, 144, 173);
   margin: 0;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+/* Remove old courses-header styles */
+.courses-header {
+  display: none;
 }
 
 .courses-grid {
-  padding: 40px 20px;
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr;
@@ -40,14 +46,25 @@
   border: 1px solid #f1f5f9;
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   position: relative;
+  transform: translateY(0);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  min-height: 44px;
 }
 
-.course-card:hover {
-  transform: translateY(-4px);
+.course-card:active {
+  transform: translateY(-0.25px) scale(0.998);
   border-color: #e2e8f0;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.course-card:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 .course-image {
@@ -61,24 +78,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(1);
 }
 
-.course-card:hover .course-image img {
-  transform: scale(1.05);
+.course-card:active .course-image img {
+  transform: scale(1.002);
 }
 
 /* Custom positioning for each course thumbnail */
 .course-image-te_1 img {
-  object-position: center 45%; /* Adjust this value - try 20%, 40%, etc. */
+  object-position: center 45%;
 }
 
 .course-image-es_1 img {
-  object-position: center 35%; /* Adjust this value for Spanish course */
+  object-position: center 35%;
 }
 
 .course-image-fr_1 img {
-  object-position: center 45%; /* Adjust this value for French course */
+  object-position: center 45%;
 }
 
 .course-content {

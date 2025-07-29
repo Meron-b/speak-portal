@@ -22,13 +22,19 @@
   font-weight: 600;
   font-size: 14px;
   border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.back-button:hover {
+.back-button:active {
   background: #f8fafc;
   color: rgb(18, 32, 90);
   border-color: #cbd5e1;
+  transform: scale(0.97);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .lesson-hero {
@@ -156,19 +162,22 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   margin: 0 auto;
   min-width: 180px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.record-button:hover {
+.record-button:active {
   background: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+  transform: translateY(-0.5px) scale(0.98);
+  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.25);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .record-button.recording {
@@ -176,8 +185,9 @@
   animation: pulse 2s infinite;
 }
 
-.record-button.recording:hover {
+.record-button.recording:active {
   background: #dc2626;
+  transform: translateY(-0.5px) scale(0.98);
 }
 
 .record-icon {

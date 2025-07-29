@@ -44,32 +44,34 @@ function CoursesList() {
 
   return (
     <div className="courses-container">
-      <header className="courses-header">
-        <h1>Language Courses</h1>
-        <p>Choose a course to start learning</p>
-      </header>
-      
-      <div className="courses-grid">
-        {courses.map((course) => (
-          <Link 
-            key={course.id} 
-            to={`/courses/${course.id}`} 
-            className="course-card"
-          >
-            <div className={`course-image course-image-${course.id}`}>
-              <img src={course.thumbnailImageUrl} alt={course.title} />
-            </div>
-            <div className="course-content">
-              <h2 className="course-title">{course.title}</h2>
-              <p className="course-subtitle">{course.subtitle}</p>
-              <div className="course-meta">
-                <span className="course-language">{course.language}</span>
-                <span className="course-lessons">{course.lessons.length} lessons</span>
+      <section className="courses-section">
+        <div className="section-header">
+          <h2>Language Courses</h2>
+          <p>Choose a course to start learning</p>
+        </div>
+        
+        <div className="courses-grid">
+          {courses.map((course) => (
+            <Link 
+              key={course.id} 
+              to={`/courses/${course.id}`} 
+              className="course-card"
+            >
+              <div className={`course-image course-image-${course.id}`}>
+                <img src={course.thumbnailImageUrl} alt={course.title} />
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+              <div className="course-content">
+                <h2 className="course-title">{course.title}</h2>
+                <p className="course-subtitle">{course.subtitle}</p>
+                <div className="course-meta">
+                  <span className="course-language">{course.language}</span>
+                  <span className="course-lessons">{course.lessons.length} lessons</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

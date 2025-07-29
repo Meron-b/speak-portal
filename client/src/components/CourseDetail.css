@@ -22,13 +22,19 @@
   font-weight: 600;
   font-size: 14px;
   border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.back-button:hover {
+.back-button:active {
   background: #f8fafc;
   color: rgb(18, 32, 90);
   border-color: #cbd5e1;
+  transform: scale(0.97);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .course-hero {
@@ -133,13 +139,18 @@
   align-items: center;
   gap: 16px;
   border: 1px solid #f1f5f9;
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(0);
 }
 
-.lesson-card:hover {
-  transform: translateY(-2px);
+.lesson-card:active {
+  transform: translateY(-0.5px) scale(0.995);
   border-color: #e2e8f0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .lesson-number {
@@ -154,6 +165,11 @@
   font-weight: 700;
   font-size: 16px;
   flex-shrink: 0;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.lesson-card:active .lesson-number {
+  transform: scale(0.95);
 }
 
 .lesson-image {
@@ -168,6 +184,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: scale(1);
+}
+
+.lesson-card:active .lesson-image img {
+  transform: scale(1.02);
 }
 
 .lesson-content {
