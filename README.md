@@ -70,38 +70,71 @@ Your take-home project will be a key discussion topic during your onsite intervi
 - Challenges faced and how you solved them
 - Features or improvements you would add with more time
 
-## Getting started
+## Running the Application Locally
 
-1. Fork and clone [this repository](https://github.com/usespeakeasy/full-stack-take-home-assessment)
+### Prerequisites
 
-    ```bash
-    gh repo fork usespeakeasy/full-stack-take-home-assessment --clone
-    ```
+- Node.js (version 14 or higher)
+- npm (comes with Node.js)
 
-1. Update your forked repository visibility to `private`
+### Setup Instructions
 
-    ```bash
-    gh repo edit <your-username>/full-stack-take-home-assessment --visibility private --accept-visibility-change-consequences
-    ```
+1. **Clone the repository** (if not already done):
+   ```bash
+   git clone https://github.com/Meron-b/speak-portal.git
+   cd full-stack-take-home-assessment
+   ```
 
-1. Complete your work in your forked repository
-1. Add a section to the `README` describing how to run the application locally
-1. Add `tc`, `jerrypopsoff`, and `ngamolsky` as collaborators to your fork:
+2. **Install server dependencies**:
+   ```bash
+   cd server
+   npm install
+   ```
 
-    ```bash
-    gh repo add-collaborator <your-username>/full-stack-take-home-assessment tc
-    gh repo add-collaborator <your-username>/full-stack-take-home-assessment jerrypopsoff
-    gh repo add-collaborator <your-username>/full-stack-take-home-assessment ngamolsky
-    ```
+3. **Install client dependencies**:
+   ```bash
+   cd ../client
+   npm install
+   ```
 
-1. Send the link to your fork to your recruiter
+### Running the Application
 
-## Questions or need help?
+The application consists of two parts that need to be run simultaneously:
 
-If you have any questions or need clarification at any point during the take-home, please email your recruiter. They will make sure your question reaches our team, and we will get back to you as soon as possible.
+1. **Start the backend server** (from the `server` directory):
+   ```bash
+   cd server
+   npm start
+   ```
+   - Server will run on `http://localhost:3001`
+   - WebSocket server will be available at `ws://localhost:3001`
+   - API endpoints will be available at `http://localhost:3001/api`
 
-We want you to feel supported throughout the process—no question is too small!
+2. **Start the frontend client** (from the `client` directory, in a new terminal):
+   ```bash
+   cd client
+   npm start
+   ```
+   - Client will run on `http://localhost:3000`
+   - Browser should automatically open to the application
 
----
+### Accessing the Application
 
-Good luck! We look forward to reviewing your work. 🚀
+Once both servers are running:
+- Open your browser to `http://localhost:3000`
+- The application will display a list of available courses
+- Navigate through courses and lessons to test the recording functionality
+
+### API Endpoints
+
+- `GET /api/courses` - List all courses
+- `GET /api/courses/:courseId` - Get course details and lessons
+- `GET /api/lessons/:lessonId` - Get lesson details
+- `GET /api/health` - Health check endpoint
+
+### WebSocket Events
+
+- `start_recording` - Begin recording simulation
+- `stop_recording` - End recording simulation
+- `transcription_chunk` - Receive real-time transcription data
+- `transcription_complete` - Recording session completed
