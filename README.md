@@ -2,13 +2,15 @@
 
 ## Project Overview
 
-📄 [Google-inspired Design Doc](https://docs.google.com/document/d/1y6X6ODpkvbQFJUUszwvpGaulPQ1m4Fh1rdWhxVu-QAQ/edit?usp=sharing) 
+📄 [__Google-inspired Design Doc__](https://docs.google.com/document/d/1y6X6ODpkvbQFJUUszwvpGaulPQ1m4Fh1rdWhxVu-QAQ/edit?usp=sharing) 
 
 Miniature language learning portal: a simple web application where users can browse courses, view lessons, and simulate recording/transcribing speech for a lesson.
 
-This project is a proof of concept for a language learning mobile application with voice recording functionality inspired by Speak. The recording experinece simulates real-time transcription by sending audio cheunks to the backend via WebSocket. The web app is designed to support only mobile viewports.
+This project is a proof of concept for a language learning mobile application with voice recording functionality inspired by [Speak](https://www.speak.com/). The recording experinece simulates real-time transcription by sending audio cheunks to the backend via WebSocket. The web app is designed to support only mobile viewports.
 
-Visit the design doc for the high-level and detailed designs, challenges + resolution, plans for scaling, and future features & improvements!
+Visit the __Design Doc__ for the high-level and detailed designs, challenges + resolution, plans for scaling, and future features & improvements!
+
+![Speak Portal UI](client/public/SpeakPortalUI.png)
 
 #### Teck Stack
 
